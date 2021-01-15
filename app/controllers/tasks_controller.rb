@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   def index
-    render
+    tasks = Task.all
+    render status: :ok, json: {tasks: tasks}
   end
 end
