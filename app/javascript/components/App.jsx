@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import TasksIndex from "./Tasks/Index";
 
 const App = (props) => {
-  useEffect(() => {
-    initializeLogger();
-    logger.info("Log from js-logger");
-  }, []);
-
   console.log("props");
   console.log(props);
   return (
