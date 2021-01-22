@@ -39,6 +39,10 @@ gem 'bcrypt', '~> 3.1.13'
 gem "pundit"
 
 
+#Add classnames
+gem 'classnames-rails', '~> 2.1', '>= 2.1.5'
+
+
 
 
 
