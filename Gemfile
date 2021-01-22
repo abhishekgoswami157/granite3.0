@@ -31,6 +31,21 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # react rails
 gem 'react-rails'
 
+
+# Add bcrypt
+gem 'bcrypt', '~> 3.1.13'
+
+# Add pundit for authorization
+gem "pundit"
+
+
+#Add classnames
+gem 'classnames-rails', '~> 2.1', '>= 2.1.5'
+
+
+
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
