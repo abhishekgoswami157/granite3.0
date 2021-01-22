@@ -35,6 +35,10 @@ gem 'react-rails'
 # Add bcrypt
 gem 'bcrypt', '~> 3.1.13'
 
+# Add pundit for authorization
+gem "pundit"
+
+
 
 
 

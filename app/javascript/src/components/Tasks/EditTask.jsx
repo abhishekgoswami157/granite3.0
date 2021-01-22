@@ -97,7 +97,7 @@ const EditTask = ({ history }) => {
         payload: { task: { title, user_id: userId } },
       });
       setLoading(false);
-      history.push("/dashboard");
+      history.push("/");
     } catch (error) {
       setLoading(false);
       logger.error(error);
@@ -107,6 +107,7 @@ const EditTask = ({ history }) => {
   const fetchUserDetails = async () => {
     try {
       const response = await usersApi.list();
+      // console.log(response, "USER DETAILS IN EDIT TASK");
       setUsers(response.data.users);
     } catch (error) {
       logger.error(error);
@@ -118,6 +119,7 @@ const EditTask = ({ history }) => {
   const fetchTaskDetails = async () => {
     try {
       const response = await tasksApi.show(id);
+      // console.log(response, "TASKDETAILS IN EDIT TASK");
       setTitle(response.data.task.title);
       setAssignedUser(response.data.assigned_user);
       setUserId(response.data.assigned_user.id);

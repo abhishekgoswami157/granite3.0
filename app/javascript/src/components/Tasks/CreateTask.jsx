@@ -64,7 +64,9 @@ const CreateTask = ({ history }) => {
   const fetchUserDetails = async () => {
     try {
       const response = await usersApi.list();
+      // console.log(response, "user RESPONSE IN CREATE TASK");
       setUsers(response.data.users);
+
       setUserId(response.data.users[0].id);
       setPageLoading(false);
     } catch (error) {
