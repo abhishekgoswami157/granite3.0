@@ -3,13 +3,29 @@ class TasksController < ApplicationController
   before_action :authenticate_user_using_x_auth_token, except: [:new, :edit]
 
   before_action :load_task, only: [:show, :update, :destroy]
+  # def index
+  #   # tasks = Task.all
+  #   tasks = policy_scope(Task)
+  #   pending_tasks = tasks.pending 
+  #   completed_tasks = tasks.completed 
+  #   render status: :ok, json: {tasks: { pending: pending_tasks, completed: completed_tasks }}
+  # end
+
   def index
-    # tasks = Task.all
     tasks = policy_scope(Task)
-    pending_tasks = tasks.pending 
-    completed_tasks = tasks.completed 
-    render status: :ok, json: {tasks: { pending: pending_tasks, completed: completed_tasks }}
+    render status: :ok, json: {
+      tasks: {
+        pending: tasks.organize(:pending).as_json(include: {
+          user: {
+            only: [:name, :id]
+          }
+        }),
+        completed: tasks.organize(:completed)
+      }
+    }
   end
+  
+  
 
   def create
     @task = Task.new(task_params.merge(creator_id: @current_user.id))
@@ -50,7 +66,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :user_id, :progress)
+    params.require(:task).permit(:title, :user_id, :progress, :status)
   end
 
   def load_task
@@ -60,6 +76,8 @@ class TasksController < ApplicationController
     rescue ActiveRecord::RecordNotFound => errors
       render json: {errors: errors}, status: :not_found
   end
+
+  
 end
 
 
